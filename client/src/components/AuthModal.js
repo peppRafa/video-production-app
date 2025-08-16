@@ -63,7 +63,11 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
         ? { email: formData.email, password: formData.password }
         : formData;
       
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const apiBaseUrl = process.env.NODE_ENV === 'production' 
+        ? '' // Same domain in production
+        : 'http://localhost:5000';
+      
+      const response = await fetch(`${apiBaseUrl}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
