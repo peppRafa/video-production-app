@@ -1,4 +1,4 @@
-const { sequelize } = require('../config/database');
+const { sequelize, testConnection } = require('../config/database');
 const User = require('./User');
 const Project = require('./Project');
 
@@ -20,5 +20,6 @@ module.exports = {
   sequelize,
   User,
   Project,
-  syncDatabase
+  syncDatabase,
+  testConnection
 };
