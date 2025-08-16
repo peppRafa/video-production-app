@@ -10,7 +10,7 @@
     "build": "cd client && npm run build",
     "install-deps": "npm install && cd server && npm install && cd ../client && npm install",
     "start": "cd server && npm start",
-    "heroku-postbuild": "cd server && npm install && cd ../client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build && cd ../server && npm install"
   },
   "keywords": ["video-production", "project-management", "ai", "react", "nodejs"],
   "author": "Video Production Team",

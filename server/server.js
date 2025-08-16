@@ -46,6 +46,22 @@ app.use('/api/media', require('./routes/media'));
 app.use('/api/team', require('./routes/team'));
 app.use('/api/ai', require('./routes/ai'));
 
+// Serve static files from React build
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path');
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  
+  // Handle React routing - return all requests to React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+} else {
+  // 404 handler for development
+  app.use('*', (req, res) => {
+    res.status(404).json({ message: 'Route not found' });
+  });
+}
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ 
